@@ -29,8 +29,6 @@ import org.apache.juli.logging.LogFactory;
  */
 public class BonitaLocaleFilter extends FilterBase {
 
-    // Log must be non-static as loggers are created per class-loader and this
-    // Filter may be used in multiple class loaders
     private final Log log = LogFactory.getLog(BonitaLocaleFilter.class); // must not be static
 
     private static final String ICOMING_HTTP_REQUEST = "First call addCookie - incoming HTTP request";
@@ -137,7 +135,7 @@ public class BonitaLocaleFilter extends FilterBase {
               }
             }
             wrapped = new ResponseWrapper((HttpServletResponse)response, language, bonitaLocaleCookieName, dryRun, log, messageWriter.toString());
-          } catch (Exception e) {
+          } finally {
             if (messagePrinter != null) {
               messagePrinter.close();
             }
