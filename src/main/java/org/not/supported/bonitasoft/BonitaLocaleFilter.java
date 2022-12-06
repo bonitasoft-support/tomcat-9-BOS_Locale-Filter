@@ -39,6 +39,7 @@ public class BonitaLocaleFilter extends FilterBase {
     private static final String PARAMETERS = "Parameters: ";
     private static final String QUERY_STRING_STARTER = "?";
     private static final String PARAMETER_SEP = ", ";
+    private static final Pattern USER_LOGIN_PASS_QUERY_STRING_PATTERN = Pattern.compile("(user[^=]*|login[^=]*|pass[^=]*)=[^&]*", Pattern.CASE_INSENSITIVE);
     private static final Pattern USER_LOGIN_PATTERN = Pattern.compile("[[:blank:]]*(user|login).*", Pattern.CASE_INSENSITIVE);
     private static final Pattern PASS_PATTERN = Pattern.compile("[[:blank:]]*pass.*", Pattern.CASE_INSENSITIVE);
     private static final String KEY_VALUE_MAP_SEP = ":";
@@ -105,7 +106,7 @@ public class BonitaLocaleFilter extends FilterBase {
               messagePrinter.print(httpRequest.getRequestURL());
               if (httpRequest.getQueryString() != null) {
                 messagePrinter.print(QUERY_STRING_STARTER);
-                messagePrinter.println(httpRequest.getQueryString());
+                messagePrinter.println(USER_LOGIN_PASS_QUERY_STRING_PATTERN.matcher(httpRequest.getQueryString()).replaceAll("$1=***"));
               } else {
                 messagePrinter.println();
               }
