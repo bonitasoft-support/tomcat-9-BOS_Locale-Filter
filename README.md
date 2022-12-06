@@ -1,14 +1,14 @@
 # tomcat-9-BOS_Locale-Filter
-A filter to force a value of BOS_Locale cookie. 
+A filter to force a value of BOS_Locale cookie.  
 # Parameters
-The `language` is configurable: default en. 
-The `bonitaLocaleCookieName` is configurable: default BOS_Locale. 
-When `dryRun` is true, nothing is done. 
+The `language` is configurable: default en.  
+The `bonitaLocaleCookieName` is configurable: default BOS_Locale.  
+When `dryRun` is true, nothing is done.  
 
 > **HINT:** With DryRun set to true, log level set to `FINER` the filter will trace in the log file all the calls
->           to addCookie(...) method with cookie name and value. 
+>           to addCookie(...) method with cookie name and value.  
 # Download the project
-Open a terminal: 
+Open a terminal:  
 ```
 git clone git@github.com:bonitasoft-support/tomcat-9-BOS_Locale-Filter.git
 ```
@@ -22,7 +22,7 @@ mvn clean package
 cp target/BonitaLocaleFilter-1.0-SNAPSHOT.jar path/to/BonitaSubscription/server/lib/bonita
 ```
 # Configuration
-Edit the path/to/BonitaSubscription/server/webapps/bonita/WEB-INF/web.xml 
+Edit the path/to/BonitaSubscription/server/webapps/bonita/WEB-INF/web.xml  
 - Insert before the first `<filter>` xml element this block of lines, and adapt the parameters' values as needed
 ```
     <filter>
@@ -44,22 +44,22 @@ Edit the path/to/BonitaSubscription/server/webapps/bonita/WEB-INF/web.xml
       -->
     </filter>
 ```
-- Insert before the first `<filter-mapping>` xml element this block of lines 
+- Insert before the first `<filter-mapping>` xml element this block of lines  
 ```
     <filter-mapping>
       <filter-name>BonitaLocaleFilter</filter-name>
       <url-pattern>/*</url-pattern>
     </filter-mapping>
 ```
-Do the necessary changes in the path/to/BonitaSubscription/server/webapps/bonita.war 
+Do the necessary changes in the path/to/BonitaSubscription/server/webapps/bonita.war  
 # Add logging configuration
-Edit the `/opt/BonitaSubscription-2021.2-u0/server/conf/logging.properties` file and add these lines after the line 61: 
+Edit the `/opt/BonitaSubscription-2021.2-u0/server/conf/logging.properties` file and add these lines after the line 61:  
 ```
 # BOS_Locale level INFO no messages ; FINE addCookie(BOS_Locale) are logged ; FINER incoming HTTP request info and addCoookie(...) calls are logged
 org.not.supported.bonitasoft.BonitaLocaleFilter.level = FINEST
 ```
 
-> **INFORMATION:** log.debug(...) and log.trace(...) methods are used in the lines of code. 
+> **INFORMATION:** log.debug(...) and log.trace(...) methods are used in the lines of code.  
 # Log file abstract
 ```
 2022-12-06 12:02:21.983 +0100 FINER (http-nio-8080-exec-2) org.not.supported.bonitasoft.BonitaLocaleFilter First call addCookie - incoming HTTP request
